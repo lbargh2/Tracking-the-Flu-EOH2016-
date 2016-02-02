@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>D3 Graphic</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>D3 Graphic</h2>
+    <div id="chart"></div>
+  </div>
+  <script src="ref/d3.min.js"></script>
+  <script src="ref/node_modules/topojson/build/topojson.min.js"></script>
+  <script src="ref/node_modules/datamaps/dist/datamaps.usa.min.js"></script>
+  <div id="container1" style="position: relative; width: 600px; height: 450px;"></div>
+
+
+       <script>
+         //basic map config with custom fills, mercator projection
+        var map = new Datamap({
+          scope: 'subunits-ny',
+          element: document.getElementById('container1'),
+          projection: '',
+          geographyConfig: {
+            dataUrl: 'newyork-with-counties.json'
+          },
+          setProjection: function(element) {
+            var projection = d3.geo.equirectangular()
+              .center([-72, 43])
+              .rotate([4.4, 0])
+              .scale(4000)
+              .translate([element.offsetWidth / 2, element.offsetHeight / 2]);
+            var path = d3.geo.path()
+              .projection(projection);
+
+            return {path: path, projection: projection};
+          },
+          fills: {
+            defaultFill: '#f0af0a',
+            lt50: 'rgba(0,244,244,0.9)',
+            gt50: 'red'
+          },
+
+          /*data: {
+            '071': {fillKey: 'lt50' },
+            '001': {fillKey: 'gt50' }
+          }*/
+        });
+
+       </script>
+
+              <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-36315921-1']);
+    _gaq.push(['_setDomainName', 'bl.ocks.org']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        //ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+  </body>
