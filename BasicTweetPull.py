@@ -19,8 +19,9 @@ def print_tweets(api, filter, start_date, end_date, region, count):
         for tweet in tweets:
             #if (datetime.datetime.now() - tweet.created_at).days < 5: # example time stamp: 2015-11-24 02:13:33 or 2015-11-01
             #    #Do processing here:
-            #    #print tweet.geocode
+            print tweet.coordinates
             print tweet.text.encode("utf-8")
+            #print tweet.split(',"geo":')[1].split('","url')[0]
             ct = ct + 1
 
             # exit clause
@@ -89,21 +90,21 @@ def tweetPull():
         filter[x] = filter[x].strip()
 
     # dates to search within
-    start_date = "2015-12-01" # year-mo-dy format
-    end_date = "2016-01-01"
+    start_date = "2016-02-01" # year-mo-dy format
+    end_date = "2016-02-18"
 
     # area of search
     region = [41.65,-79.67,44.91,-73.39] # set using coordinates (I think this is the state of New York atm)
 
     # desired number of tweets
-    count = 20
+    count = 30
 
     # json file to write to (if writing to file)
     json_file = 'tweets.json'
 
     ''' run function '''
-    #print_tweets(api, filter, start_date, end_date, region, count)
-    write_tweets_to_json(api, filter, start_date, end_date, region, count, json_file)
+    print_tweets(api, filter, start_date, end_date, region, count)
+    #write_tweets_to_json(api, filter, start_date, end_date, region, count, json_file)
 
 tweetPull()
 
