@@ -13,51 +13,19 @@
   <script src="ref/d3.min.js"></script>
   <script src="ref/node_modules/topojson/build/topojson.min.js"></script>
   <script src="ref/node_modules/datamaps/dist/datamaps.usa.min.js"></script>
-  <div id="container1" style="position: relative; width: 800px; height: 600px;"></div>
+  <div id="container2" style="position: relative; width: 800px; height: 600px;"></div>
 
 
-       <script>
-         //basic map config with custom fills, mercator projection
-        var map = new Datamap({
-          element: document.getElementById('container1'),
-          projection: '',
-          geographyConfig: {
-            dataUrl: 'census_tracts_2010.json'
-          },
-          scope: 'nyct2010',
-          setProjection: function(element) {
-            var projection = d3.geo.equirectangular()
-              .center([-73.9, 40.75])
-              .scale(68000)
-            var path = d3.geo.path()
-              .projection(projection);
-
-            return {path: path, projection: projection};
-          },
-          fills: {
-            defaultFill: '#f0af0a',
-            lt50: 'rgba(0,244,244,0.9)',
-            gt50: 'red'
-          },
-
-          /*data: {
-            '071': {fillKey: 'lt50' },
-            '001': {fillKey: 'gt50' }
-          }*/
-        });
-
-       </script>
-
-              <script type="text/javascript">
-    var _gaq = _gaq || [];
+    /*var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-36315921-1']);
     _gaq.push(['_setDomainName', 'bl.ocks.org']);
     _gaq.push(['_setAllowLinker', true]);
-    _gaq.push(['_trackPageview']);
-    (function() {
+    _gaq.push(['_trackPageview']);*/
+    /*(function() {
       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        //ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+    })();*/
   </script>
+  <script src="script.js"></script>
   </body>
