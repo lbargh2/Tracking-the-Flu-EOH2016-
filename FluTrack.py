@@ -117,8 +117,19 @@ def tweetPull():
 # You will need to Ctrl-C or whatever manually for the time being
 
 def analysis(tweet_list):
-    symptoms = ['cough', 'fever','sick'] # need a better way to do this. shold probably write this into a json and read it when analyzing
-
+    symptoms1 = ['fever', 'chills', 'aches', 'fatigue', 'tired', 'tanmiflu', 'theraflu', 'H1N1', 'swine', 'flu', 'influenza'] #1 point
+    #symptoms2 = [] #.9 points
+    symptoms3 = ['cough', 'headache', 'naseau', 'vomitting', 'dayquil', 'nyquil', 'temperature'] #.8 point
+    symptoms4 = ['pneumoia'] #.7 point
+    symptoms5 = ['ill', 'sick'] #.6points
+    symptoms6 = ['runny noise', 'stuffy nose', 'congestion', 'sick', 'mucinex'] #.5 points
+    symptoms7 = ['sore throat', 'tylenol'] #.4points
+    #symptoms8 = [] #.3points
+    symptoms9 = ['sneezing', 'shot', 'vaccine', 'medicine'] #.2points
+    symptoms0 = ['sore', 'doctor'] #.1points
+    # need a better way to do this. shold probably write this into a json and read it when analyzing
+   
+    
     for tweet in tweet_list:
 
         tweet_score = 0
@@ -126,18 +137,23 @@ def analysis(tweet_list):
         words = word_tokenize(tweet)
         #tagged_words = nltk.pos_tag(words) # not sure what to use this for yet, but I think it's at least cool to have
         for word in words:
-            tweet_score = tweet_score + symptomRecognition(word, symptoms)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms1, 1) 
+            #tweet_score = tweet_score + symptomRecognition(word, symptoms2, .9)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms3, .8)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms4, .7)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms5, .6)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms6, .5)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms7, .4)
+            #tweet_score = tweet_score + symptomRecognition(word, symptoms8, .3)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms9, .2)
+            tweet_score = tweet_score + symptomRecognition(word, symptoms0, .1)
 
         print(tweet)
         print(tweet_score)
 
-def symptomRecognition(word, symptoms):
-    symptoms1 = [symptoms[0], symptoms[1]]
-    symptoms2 = [symptoms[2]]
-    if word.lower() in symptoms1: # check lowercase word
-        return 1
-    if word.lower() in symptoms2:
-        return 0.5
+def symptomRecognition(word, symptoms, score):
+   if word.lower() in symptoms: # check lowercase word
+        return score
     return 0
 
 def tweetAnalysis():
